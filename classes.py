@@ -35,3 +35,16 @@ class Screen(canvas):
             lines.append(" "*self.size[0])
         for i,line in enumerate(lines):
             print_at(self.pos[0]+1,self.pos[1]+i+1,line)
+class cluster:
+    def __init__(self):
+        self.screens = []
+    def draw(self,index:int):
+        if not index > len(self.screens):
+            self.screens[index].draw()
+    def draw_all(self):
+        for screen in self.screens:
+            screen.draw()
+    def remove_screen(self,index:int):
+        if not index > len(self.screens):
+            self.screens[index].clear()
+            self.screens.remove(self.screens[index])
