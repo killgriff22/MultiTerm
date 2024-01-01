@@ -2,7 +2,7 @@ import sys
 import os
 import subprocess
 def load_config() -> dict:
-    return eval(open("config.py","r").read())
+    return exec(compile(open("config.py").read(),"config","exec"))
 def save_config(config:dict) -> None:
     with open("config.py","w") as f:
         f.write(str(config))
