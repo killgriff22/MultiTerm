@@ -8,7 +8,7 @@ while True:
     #display2.fill(warn(" "))
     display.blit("test",(0,0))
     try:
-        display.clear()
+        clear()
         display.draw()
 #        display2.draw()
     except KeyboardInterrupt:
