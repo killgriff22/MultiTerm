@@ -8,8 +8,8 @@ while True:
     #display2.fill(warn(" "))
     display.blit("test",(0,0))
     try:
-        clear()
         display.draw()
+        clear()
 #        display2.draw()
     except KeyboardInterrupt:
         clear()
