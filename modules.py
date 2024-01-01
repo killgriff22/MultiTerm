@@ -1,6 +1,5 @@
 import sys
 import os
-import keyboard
 import subprocess
 def load_config() -> dict:
     return eval(open("config.py","r").read())
