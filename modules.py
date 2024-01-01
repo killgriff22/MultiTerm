@@ -1,5 +1,7 @@
 import sys
 import os
+import keyboard
+import subprocess
 def load_config() -> dict:
     return eval(open("config.py","r").read())
 def save_config(config:dict) -> None:
@@ -7,6 +9,7 @@ def save_config(config:dict) -> None:
         f.write(str(config))
     return
 def print_at(x,y,content):
+    command = f"\x1b7\x1b[{y};{x}f{content}\x1b8"
     sys.stdout.write(f"\x1b7\x1b[{y};{x}f{content}\x1b8")
     sys.stdout.flush()
 def clear():
@@ -31,10 +34,32 @@ class Back:
     WHITE = '\033[47m'
 RESET = '\033[0m'
 def info(message:str) -> None:
-    print(f"{Fore.BLACK}{Back.BLUE}{message}{RESET}")
+    return (f"{Fore.BLACK}{Back.BLUE}{message}{RESET}")
 def warn(message:str) -> None:
-    print(f"{Fore.BLACK}{Back.YELLOW}{message}{RESET}")
+    return (f"{Fore.BLACK}{Back.YELLOW}{message}{RESET}")
 def error(message:str) -> None:
     return f"{Fore.BLACK}{Back.RED}{message}{RESET}"
 def success(message:str) -> None:
-    print(f"{Fore.BLACK}{Back.GREEN}{message}{RESET}")
+    return (f"{Fore.BLACK}{Back.GREEN}{message}{RESET}")
+def configure_safe_zone(display):
+    w_base = 0
+    h_base = 0
+    while True:
+        w,h = display.size
+        screen = [[" "]*w for _ in range(h)]
+        w-=1
+        h-=1
+        poses=[
+            ((0+w_base),(0+h_base)),((w  )-w_base,  (h  )-h_base),((0)+w_base,(h  )-h_base),((w  )-w_base,  (0)+h_base),
+            ((1+w_base),(0+h_base)),((w-1)-w_base,  (h  )-h_base),((1)+w_base,(h  )-h_base),((w-1)-w_base,  (0)+h_base),
+            ((0+w_base),(1+h_base)),((w  )-w_base,  (h-1)-h_base),((0)+w_base,(h-1)-h_base),((w  )-w_base,  (1)+h_base),
+               ]
+        for pos in poses:
+            display.content[pos[1]][pos[0]] = "█"
+        string = f"Current Size: {w-w_base},{h-h_base}"
+        pos_x = w//2-len(string)//2
+        pos_y = h//2
+        for offset, char in enumerate(string):
+            display.content[pos_y][pos_x+offset] = char
+        #display.clear()
+        display.draw()
