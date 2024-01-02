@@ -7,5 +7,6 @@ display.blit("test",(0,0))
 displays.screens.append(display)
 import datetime
 while True:
-    display.blit(str(datetime.datetime.now()),(display.size[0]-len(str(datetime.datetime.now())),display.size[1]//2))
+    time=datetime.datetime.now().strftime("%H:%M:%S %d/%m/%Y")
+    display.blit(time,(display.size[0]//2-len(time),display.size[1]//2))
     displays.draw_all()
