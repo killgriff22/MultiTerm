@@ -12,12 +12,19 @@ class canvas:
                 self.content[y][x] = char
         return
 
-    def blit(self, text: str, pos: tuple[int, int]):
+    def blit(self, text: str, pos: tuple[int, int], front_modifier: str = "", back_modifier: str = "") -> None:
         n = self.size[0]
         lines = [list(text[i:i+n]) for i in range(0, len(text), n)]
-        for y, line in enumerate(lines):
-            for x, char in enumerate(line):
-                self.content[pos[1]+y][pos[0]+x] = char
+        y = 0
+        while y < len(lines):
+            for x, char in enumerate(lines[y]):
+                if char == "\n":
+                    lines.insert(y+1, lines[y][x+1:])
+                    lines[y] = lines[y][:x]
+                    break
+                self.content[pos[1]+y][pos[0] +
+                                       x] = front_modifier+char+back_modifier
+            y += 1
 
 
 class Screen(canvas):
