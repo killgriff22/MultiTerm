@@ -14,15 +14,7 @@ class canvas:
 
     def blit(self, text: str, pos: tuple[int, int], front_modifier: str = "", back_modifier: str = "") -> None:
         n = self.size[0]
-        lines = [list(text[i:i+n]) for i in range(0, len(text), n)]
-        y = 0
-        while y < len(lines):
-            for x, char in enumerate(lines[y]):
-                if char == "\n":
-                    lines.insert(y+1, lines[y][x+1:])
-                    lines[y] = lines[y][:x]
-                    break
-            y += 1
+        lines = text.split("\n")
         for y, line in enumerate(lines):
             for x, char in enumerate(line):
                 if x+pos[0] < self.size[0] and y+pos[1] < self.size[1]:

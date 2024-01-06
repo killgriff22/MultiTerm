@@ -2,16 +2,18 @@ import datetime
 from classes import *
 from pyfiglet import Figlet
 import pyfiglet
-f = Figlet("mono12")
+clear()
+f = Figlet("ansi_regular")
 w, h = os.get_terminal_size()
-SafeZone = (0, 0)
+SafeZone = (3, 1)
 displays = cluster()
 display = Screen((w-SafeZone[0]*2, h-SafeZone[1]*2), SafeZone)
-# display2 = Screen((w,h//2),(0,h//2))
-# display2.fill(warn(" "))
 displays.screens.append(display)
 while True:
-    time = datetime.datetime.now().strftime("%H/%M")
-    display.fill(warn(" "))
-    display.blit(time, (0, 0), Fore.BLACK+Back.BLUE, RESET)
+    display.fill(error(" "))
+    time = datetime.datetime.now()
+    Hours = f.renderText(time.strftime("%H/%M"))
+    Date = f.renderText(time.strftime("%d/%m/%Y"))
+    display.blit(Hours, (0, 0))
+    display.blit(Date, (0, len(Hours.split("\n"))))
     displays.draw_all()
