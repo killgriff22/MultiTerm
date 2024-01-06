@@ -12,7 +12,7 @@ SafeZone = (3, 1)
 displays = cluster()
 display = Screen((w-SafeZone[0]*2, h-SafeZone[1]*2), SafeZone)
 displays.screens.append(display)
-client.run(token)
+client.login(token)
 while True:
     display.fill(error(" "))
     time = datetime.datetime.now()
