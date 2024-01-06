@@ -1,6 +1,11 @@
 import sys
 import os
 import subprocess
+import hashlib
+
+
+def hash(string: str) -> str:
+    return hashlib.sha256(string.encode()).hexdigest()
 
 
 def load_config() -> dict:

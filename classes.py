@@ -22,9 +22,12 @@ class canvas:
                     lines.insert(y+1, lines[y][x+1:])
                     lines[y] = lines[y][:x]
                     break
-                self.content[pos[1]+y][pos[0] +
-                                       x] = front_modifier+char+back_modifier
             y += 1
+        for y, line in enumerate(lines):
+            for x, char in enumerate(line):
+                if x+pos[0] < self.size[0] and y+pos[1] < self.size[1]:
+                    self.content[y+pos[1]][x+pos[0]
+                                           ] = front_modifier+char+back_modifier
 
 
 class Screen(canvas):
