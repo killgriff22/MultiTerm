@@ -14,7 +14,8 @@ while True:
     time = datetime.datetime.now()
     H = 12 if int(time.strftime("%H")) % 12 == 0 else int(
         time.strftime("%H")) % 12
-    Hours = f.renderText(time.strftime(f"{H}/%M/%S"))
+    Hours = f.renderText(time.strftime(
+        f"{H}/%M/%S {'AM' if int(time.strftime('%H')) < 12 else 'PM'}"))
     Date = f.renderText(time.strftime("%d/%m/%Y"))
     display.blit(Hours, (w//2-len(Hours.split("\n")[0])//2, h//2-len(Hours.split("\n"))//2), front_modifier=Fore.BLACK +
                  Back.RED, back_modifier=RESET)
