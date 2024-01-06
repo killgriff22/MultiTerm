@@ -14,7 +14,11 @@ displays = cluster()
 display = Screen((w-SafeZone[0]*2, h-SafeZone[1]*2), SafeZone)
 displays.screens.append(display)
 asyncio.run(client.login(token))
-input("Press enter to continue...")
+if client.user:
+    display.fill(success(" "))
+else:
+    display.fill(error(" "))
+displays.draw_all()
 while True:
     display.fill(error(" "))
     time = datetime.datetime.now()
