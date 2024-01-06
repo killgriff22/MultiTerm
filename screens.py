@@ -15,10 +15,13 @@ while True:
     H = 12 if int(time.strftime("%H")) % 12 == 0 else int(
         time.strftime("%H")) % 12
     Hours = f.renderText(time.strftime(
-        f"{H}%p/%M/%S"))
+        f"{H}/%M/%S"))
+    ampm = f.renderText(time.strftime("%p"))
     Date = f.renderText(time.strftime("%d/%m/%Y"))
     display.blit(Hours, (w//2-len(Hours.split("\n")[0])//2, h//2-len(Hours.split("\n"))//2), front_modifier=Fore.BLACK +
                  Back.RED, back_modifier=RESET)
+    display.blit(ampm, (w//2-len(ampm.split("\n")[0])//2, h//2-len(ampm.split("\n"))//2),
+                 front_modifier=Fore.BLACK+Back.RED, back_modifier=RESET)
     display.blit(Date, (w//2-len(Date.split("\n")[0])//2, h//2+3),
                  front_modifier=Fore.BLACK+Back.RED, back_modifier=RESET)
     displays.draw_all()
