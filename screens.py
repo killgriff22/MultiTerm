@@ -4,6 +4,7 @@ from pyfiglet import Figlet
 import pyfiglet
 from discord import *
 from user import *
+import asyncio
 client = Client()
 clear()
 f = Figlet("ansi_regular")
@@ -12,7 +13,7 @@ SafeZone = (3, 1)
 displays = cluster()
 display = Screen((w-SafeZone[0]*2, h-SafeZone[1]*2), SafeZone)
 displays.screens.append(display)
-client.login(token)
+asyncio.run(client.login(token))
 input("Press enter to continue...")
 while True:
     display.fill(error(" "))
