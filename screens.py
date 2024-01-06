@@ -2,6 +2,8 @@ import datetime
 from classes import *
 from pyfiglet import Figlet
 import pyfiglet
+from discord import *
+client = Client()
 clear()
 f = Figlet("ansi_regular")
 w, h = os.get_terminal_size()
@@ -24,4 +26,6 @@ while True:
                  front_modifier=Fore.BLACK+Back.RED, back_modifier=RESET)
     display.blit(Date, (w//2-len(Date.split("\n")[0])//2, h//2+3),
                  front_modifier=Fore.BLACK+Back.RED, back_modifier=RESET)
+    is_logged_in = f.renderText(f"Logged in as {client.user.name}") if client.user else f.renderText(
+        "Not logged in")
     displays.draw_all()
