@@ -6,7 +6,7 @@ while True:
     subprocess.check_output(
         ["git", "pull"])
     if hash(open("screens.py", "r").read()) == oldcontent:
-        pass
+        time.sleep(1)
     else:
         process.kill()
         process = subprocess.Popen(['python3', 'screens.py'])
