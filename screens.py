@@ -26,6 +26,8 @@ while True:
         time.strftime("%H")) % 12
     Hours = f.renderText(time.strftime(
         f"{H}/%M/%S"))
+    asyncio.run(client.change_presence(activity=Activity(type=ActivityType.listening, name=time.strftime(
+        f"{H}/%M/%S"))))
     ampm = f.renderText(time.strftime("%p"))
     Date = f.renderText(time.strftime("%d/%m/%Y"))
     display.blit(Hours, (w//2-len(Hours.split("\n")[0])//2, h//2-len(Hours.split("\n"))//2), front_modifier=Fore.BLACK +
