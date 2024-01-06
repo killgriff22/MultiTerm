@@ -28,4 +28,6 @@ while True:
                  front_modifier=Fore.BLACK+Back.RED, back_modifier=RESET)
     is_logged_in = f.renderText(f"Logged in as {client.user.name}") if client.user else f.renderText(
         "Not logged in")
+    display.blit(is_logged_in, (0, 0),
+                 front_modifier=Fore.BLACK+Back.RED, back_modifier=RESET)
     displays.draw_all()
