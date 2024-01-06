@@ -20,7 +20,7 @@ while True:
     Date = f.renderText(time.strftime("%d/%m/%Y"))
     display.blit(Hours, (w//2-len(Hours.split("\n")[0])//2, h//2-len(Hours.split("\n"))//2), front_modifier=Fore.BLACK +
                  Back.RED, back_modifier=RESET)
-    display.blit(ampm, (w//2+len(Hours.split("\n")[0])//2, h//2-len(ampm.split("\n"))//2),
+    display.blit(ampm, (w//2+len(Hours.split("\n")[0])//2+1, h//2-len(ampm.split("\n"))//2),
                  front_modifier=Fore.BLACK+Back.RED, back_modifier=RESET)
     display.blit(Date, (w//2-len(Date.split("\n")[0])//2, h//2+3),
                  front_modifier=Fore.BLACK+Back.RED, back_modifier=RESET)
