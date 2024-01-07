@@ -6,8 +6,12 @@ try:
     while True:
         subprocess.check_output(
             ["git", "pull"])
-        if hash(open("screens.py", "r").read()) == oldcontent:
+        is_same = hash(open("screens.py", "r").read()) == oldcontent
+        if is_same:
             time.sleep(1)
+        elif process.poll() is not None:
+            print("Restarting...")
+            process = subprocess.Popen(['python3', 'screens.py'])
         else:
             process.kill()
             process = subprocess.Popen(['python3', 'screens.py'])
