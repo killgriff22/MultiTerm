@@ -8,5 +8,6 @@ while True:
     display.fill(error(" "))
     for i in range(1000):
         display.content[random.randint(
-            0, h)][1] = Back.WHITE+" "+RESET
+            0, display.size[1])][random.randint(
+                0, display.size[0])] = Back.WHITE+" "+RESET
     display.draw()
