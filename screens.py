@@ -7,6 +7,6 @@ display = Screen((w-SafeZone[0]*2, h-SafeZone[1]*2), SafeZone)
 while True:
     display.fill(error(" "))
     for i in range(1000):
-        display.content[random.randint(0, w)][random.randint(
-            0, h)] = Back.WHITE+" "+RESET
+        display.content[random.randint(0, h)-1][random.randint(
+            0, w)-1] = Back.WHITE+" "+RESET
     display.draw()
