@@ -61,6 +61,7 @@ async def on_message(message: discord.message.Message):
 
 @client.event
 async def on_error():
+    input("Press enter to continue...")
     exit_flag.set()
     while not ready_flag.is_set():
         pass
