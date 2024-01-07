@@ -1,15 +1,9 @@
 from classes import *
 import random
-from pydub import AudioSegment
-from pydub.playback import play
-
-# for playing mp3 file
 clear()
 w, h = os.get_terminal_size()
 SafeZone = (3, 1)
 display = Screen((w-SafeZone[0]*2, h-SafeZone[1]*2), SafeZone)
-song = AudioSegment.from_mp3("Future - Mask Off.mp3")
-play(song)
 while True:
     display.fill(error(" "))
     """for i in range(1000):
