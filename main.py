@@ -1,21 +1,26 @@
 from modules import *
 clear()
-process = subprocess.Popen(['python3', 'screens.py'])
-oldcontent = hash(open("screens.py", "r").read())
+args = sys.argv
+if len(args) >= 2:
+    name = args[1]
+else:
+    name = "screens.py"
+process = subprocess.Popen(['python3', name])
+oldcontent = hash(open(name, "r").read())
 try:
     while True:
         subprocess.check_output(
             ["git", "pull"])
-        is_same = hash(open("screens.py", "r").read()) == oldcontent
+        is_same = hash(open(name, "r").read()) == oldcontent
         if is_same:
             time.sleep(1)
         elif process.poll() is not None:
             print("Restarting...")
-            process = subprocess.Popen(['python3', 'screens.py'])
+            process = subprocess.Popen(['python3', name])
         else:
             process.kill()
-            process = subprocess.Popen(['python3', 'screens.py'])
-            oldcontent = hash(open("screens.py", "r").read())
+            process = subprocess.Popen(['python3', name])
+            oldcontent = hash(open(name, "r").read())
 except KeyboardInterrupt:
     process.kill()
     print("Exiting...")
