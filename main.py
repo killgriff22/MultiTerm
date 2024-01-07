@@ -17,6 +17,7 @@ try:
             time.sleep(1)
         elif process.poll() is not None:
             print("Restarting...")
+            input(info("Press enter to continue restarting..."))
             process = subprocess.Popen(['python3', name])
         else:
             process.kill()
