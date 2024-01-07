@@ -1,6 +1,7 @@
 from modules import *
 clear()
 args = sys.argv
+pass
 if len(args) >= 2:
     if len(args) > 2:
         name = args[1:]
