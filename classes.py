@@ -16,16 +16,25 @@ class canvas:
         n = self.size[0]
         lines = text.split("\n")
         for y, line in enumerate(lines):
+            # If y position is outside of the canvas height, scroll the canvas
+            if y+pos[1] >= self.size[1]:
+                self.content.pop(0)
+                self.content.append([" "]*self.size[0])
+                # Adjust y position to be at the bottom of the canvas
+                pos = (pos[0], self.size[1]-1)
             for x, char in enumerate(line):
                 if x+pos[0] < self.size[0] and y+pos[1] < self.size[1]:
-                    self.content[y+pos[1]][x+pos[0]
-                                           ] = front_modifier+char+back_modifier
+                    self.content[y+pos[1]][x+pos[0]] = front_modifier+char+back_modifier
 
 
 class Screen(canvas):
     def __init__(self, size: tuple, pos: tuple) -> None:
         super().__init__(size)
         self.pos = pos
+        self.program_y = None
+        self.program = None
+        self.Program_Thread = None
+        self.ExitFlag = Event()
 
     def draw(self) -> None:
         for i, line in enumerate(self.content):
@@ -45,6 +54,31 @@ class Screen(canvas):
             lines.append(" "*self.size[0])
         for i, line in enumerate(lines):
             print_at(self.pos[0]+1, self.pos[1]+i+1, line)
+    def capture_program(self, program: str, args: list[str] = []) -> None:
+        self.ExitFlag.set()
+        self.program = Popen([program]+args, shell=True, stdout=PIPE)
+        self.program_y = 0
+        for line in self.program.stdout:
+            self.blit(line.decode("utf-8").strip(), (0, self.program_y))
+            self.draw()
+            self.program_y += 1
+            if not self.ExitFlag.is_set():
+                break
+        self.program.terminate()
+        self.ExitFlag.clear()
+    def program_thread(self,program:str,args:list[str]=[]):
+        self.Program_Thread = Thread(target=self.capture_program,args=(program,args))
+        self.Program_Thread.start()
+    def stop_program(self):
+        self.ExitFlag.clear()
+        self.Program_Thread.join()
+        self.Program_Thread = None
+        self.program.terminate()
+        self.program = None
+        self.program_y = None
+        self.clear()
+        self.draw()
+        return
 
 
 class cluster:
