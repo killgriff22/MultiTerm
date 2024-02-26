@@ -1,5 +1,5 @@
 import datetime
-from classes import *
+from MultiTerm import *
 from pyfiglet import Figlet
 import pyfiglet
 clear()

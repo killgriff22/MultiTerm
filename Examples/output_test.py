@@ -1,6 +1,6 @@
 import sys
 from subprocess import *
-from classes import *
+from MultiTerm import *
 w, h = os.get_terminal_size()
 display = Screen((w//2,h),(0,0))
 display_2 = Screen((w//2,h),(w//2,0))
