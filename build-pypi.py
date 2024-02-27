@@ -1,4 +1,7 @@
 from os import listdir, system
+from asciimatics.screen import Screen
+window = Screen.open()
+window.close()
 print("updating pyproject.toml version number...")
 with open("pyproject.toml", "r+") as f:
     lines = f.readlines()
@@ -37,3 +40,4 @@ with open("src/MultiTerm/classes.py", "r+") as f:
     f.seek(0)
     f.truncate(0)
     f.write(file)
+system("pip install MultiTerm --upgrade")
