@@ -1,4 +1,5 @@
-from .modules import *class canvas:
+from .modules import *
+class canvas:
     def __init__(self, size: tuple[int, int]) -> None:
         self.size = size
         self.content = [[" "]*size[0] for _ in range(size[1])]
