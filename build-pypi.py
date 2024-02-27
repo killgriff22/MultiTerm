@@ -18,15 +18,20 @@ with open("pyproject.toml", "r+") as f:
     f.seek(0)
     f.write(lines)
 print("building...")
-with open("src/MultiTerm/__init__.py", "w") as init:
-    for file in listdir("working"):
-        with open(f"working/{file}", "r") as f:
-            lines = f.readlines()
-            lines.pop(0)
-            lines = "".join(lines)
-            init.write(lines+"\n")
+with open("src/MultiTerm/classes.py", "r+") as f:
+    file = f.readlines()
+    file[0] = "from .modules import *"
+    file = "".join(file)
+    f.seek(0)
+    f.write(file)
 system("python3 -m build")
 system("python3 -m twine upload --repository pypi dist/* -u __token__ -p pypi-AgEIcHlwaS5vcmcCJDNjMDE1MzVhLWIzNjMtNDI1My04Yjg2LTViN2ZlYjczNTA1ZQACKlszLCI0MjUzNzQ1NS01YzM5LTRmODMtOGJmZi1iMmI4ZWEwNzU2OTkiXQAABiBQUbEwXSMLY7DBm3ZMvLMGAfgwMGzsKeeP3bdZRq3SIg")
 system("git add .")
 system("git commit -m 'build'")
 system("git push")
+with open("src/MultiTerm/classes.py", "r+") as f:
+    file = f.readlines()
+    file[0] = "from modules import *"
+    file = "".join(file)
+    f.seek(0)
+    f.write(file)
