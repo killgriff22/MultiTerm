@@ -35,8 +35,14 @@ class Screen(canvas):
         self.program = None
         self.Program_Thread = None
         self.ExitFlag = Event()
+        self.events = [Event() for _ in keys]
+        self.cursor = [0, 0]
 
     def draw(self) -> None:
+        for i,flag in enumerate(self.events):
+            if flag.is_set():
+                self.blit(list(keys.items())[i][1], (self.cursor[0], self.cursor[1]))
+                flag.clear()
         for i, line in enumerate(self.content):
             if len(line)-1 > self.size[0]:
                 self.clear()
@@ -62,6 +68,10 @@ class Screen(canvas):
             self.blit(line.decode("utf-8").strip(), (0, self.program_y))
             self.draw()
             self.program_y += 1
+            for i,flag in enumerate(self.events):
+                if flag.is_set():
+                    self.program.stdin.write(list(keys.items())[i][1].encode("utf-8")+b"\n")
+                    flag.clear()
             if not self.ExitFlag.is_set():
                 break
         self.program.terminate()
@@ -85,6 +95,7 @@ class cluster:
     def __init__(self):
         self.screens = []
         self.focus = 0
+        self.cursors = []
 
     def draw(self, index: int):
         if not index > len(self.screens):
@@ -100,6 +111,7 @@ class cluster:
             self.screens.remove(self.screens[index])
     def add_screen(self,screen:Screen):
         self.screens.append(screen)
+        self.cursors.append([0,0])
     def loop(self,callback=empty):
         while True:
             event = window.get_event()       
@@ -108,5 +120,16 @@ class cluster:
                 if type(event) == asciimaticsEvent.MouseEvent:
                     if screen.pos[0] <= event.x <= screen.pos[0]+screen.size[0] and screen.pos[1] <= event.y <= screen.pos[1]+screen.size[1]:
                         self.focus = self.screens.index(screen)
+            if type(event) == asciimaticsEvent.KeyboardEvent:
+                if event.key_code == 10 or self.cursors[self.focus][0] >= self.screens[self.screens.index(screen)].size[0]:
+                    self.cursors[self.focus][1] += 1
+                    self.cursors[self.focus][0] = 0
+                    self.screens[self.focus].cursor[1] += 1
+                    self.screens[self.focus].cursor[0] = 0
+                if event.key_code in keys:
+
+                    self.screens[self.screens.index(screen)].events[list(keys.keys()).index(event.key_code)].set()
+                    self.screens[self.focus].cursor[0] += 1
+                    self.cursors[self.focus][0] += 1
                 callback(screen,event,self.focus,self.screens)
             sleep(0.1)

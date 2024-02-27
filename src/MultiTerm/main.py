@@ -10,13 +10,6 @@ def main(screen,event,focus,screens):
     if focus == screens.index(screen):
         if type(event) == asciimaticsEvent.MouseEvent:
             screen.blit("█", (event.x-screen.pos[0], event.y-screen.pos[1]))
-        elif type(event) == asciimaticsEvent.KeyboardEvent:
-            if event.key_code == 10 or cursors[focus][0] >= screen.size[0]:
-                cursors[focus][1] += 1
-                cursors[focus][0] = 0
-            if event.key_code in keys:
-                screen.blit(keys[event.key_code],(cursors[focus][0],cursors[focus][1]))
-                cursors[focus][0] += 1
     else:
         screen.fill(f"{RESET} {RESET}")
 
