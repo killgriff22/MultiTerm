@@ -1,23 +1,31 @@
-#empty line for popping
+# empty line for popping
 import sys
 import os
 import subprocess
 import hashlib
 import time
 from subprocess import Popen, PIPE
-from threading import Thread,Event
+from threading import Thread, Event
 from time import sleep
 from asciimatics.screen import Screen
 from atexit import register
 from asciimatics import event as asciimaticsEvent
 from time import sleep
 window = Screen.open()
-__exit__=exit
+__exit__ = exit
+
+
 def clean_exit():
-    return#window.close()
+    return  # window.close()
+
+
 register(clean_exit)
-def empty(*args,**kwargs):
-    return 
+
+
+def empty(*args, **kwargs):
+    return
+
+
 def hash(string: str) -> str:
     return hashlib.sha256(string.encode()).hexdigest()
 
@@ -108,3 +116,45 @@ def configure_safe_zone(display):
             display.content[pos_y][pos_x+offset] = char
         # display.clear()
         display.draw()
+
+
+keys = {
+    # 48-57 : "0-9"
+    # 65-90 : "a-z"
+    ord("0"): "0",
+    ord("1"): "1", 
+    ord("2"): "2", 
+    ord("3"): "3", 
+    ord("4"): "4", 
+    ord("5"): "5", 
+    ord("6"): "6", 
+    ord("7"): "7", 
+    ord("8"): "8", 
+    ord("9"): "9",
+    ord("a"): "a",
+    ord("b"): "b",
+    ord("c"): "c",
+    ord("d"): "d",
+    ord("e"): "e",
+    ord("f"): "f",
+    ord("g"): "g",
+    ord("h"): "h",
+    ord("i"): "i",
+    ord("j"): "j",
+    ord("k"): "k",
+    ord("l"): "l",
+    ord("m"): "m",
+    ord("n"): "n",
+    ord("o"): "o",
+    ord("p"): "p",
+    ord("q"): "q",
+    ord("r"): "r",
+    ord("s"): "s",
+    ord("t"): "t",
+    ord("u"): "u",
+    ord("v"): "v",
+    ord("w"): "w",
+    ord("x"): "x",
+    ord("y"): "y",
+    ord("z"): "z",
+}
