@@ -20,9 +20,10 @@ with open("pyproject.toml", "r+") as f:
 print("building...")
 with open("src/MultiTerm/classes.py", "r+") as f:
     file = f.readlines()
-    file[0] = "from .modules import *"
+    file[0] = "from .modules import *\n"
     file = "".join(file)
     f.seek(0)
+    f.truncate(0)
     f.write(file)
 system("python3 -m build")
 system("python3 -m twine upload --repository pypi dist/* -u __token__ -p pypi-AgEIcHlwaS5vcmcCJDNjMDE1MzVhLWIzNjMtNDI1My04Yjg2LTViN2ZlYjczNTA1ZQACKlszLCI0MjUzNzQ1NS01YzM5LTRmODMtOGJmZi1iMmI4ZWEwNzU2OTkiXQAABiBQUbEwXSMLY7DBm3ZMvLMGAfgwMGzsKeeP3bdZRq3SIg")
@@ -31,7 +32,8 @@ system("git commit -m 'build'")
 system("git push")
 with open("src/MultiTerm/classes.py", "r+") as f:
     file = f.readlines()
-    file[0] = "from modules import *"
+    file[0] = "from modules import *\n"
     file = "".join(file)
     f.seek(0)
+    f.truncate(0)
     f.write(file)
