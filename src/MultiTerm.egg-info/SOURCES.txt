@@ -3,7 +3,6 @@ README.md
 pyproject.toml
 src/MultiTerm/__init__.py
 src/MultiTerm/classes.py
-src/MultiTerm/git_reloader.py
 src/MultiTerm/main.py
 src/MultiTerm/modules.py
 src/MultiTerm.egg-info/PKG-INFO

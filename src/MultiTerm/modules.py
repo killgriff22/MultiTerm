@@ -4,8 +4,13 @@ try:
     from asciimatics.screen import Screen
     from asciimatics import event as asciimaticsEvent
     import pygame
-    from atexit import register
-    from time import sleep
+except:
+    os.system("pip install asciimatics pygame")
+    from asciimatics.screen import Screen
+    from asciimatics import event as asciimaticsEvent
+    import pygame
+from atexit import register
+from time import sleep
 import sys
 import subprocess
 import hashlib
