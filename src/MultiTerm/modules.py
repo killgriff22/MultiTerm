@@ -125,44 +125,18 @@ def configure_safe_zone(display):
         # display.clear()
         display.draw()
 
+valid_hex = "0123456789ABCDEF"
+def cleanhex(data):  # used for cleaning the hexadecimal color codes for fore_fromhex()
+    return ''.join(filter(valid_hex, data.upper()))
 
-keys = {
-    # 48-57 : "0-9"
-    # 65-90 : "a-z"
-    ord("0"): "0",
-    ord("1"): "1",
-    ord("2"): "2",
-    ord("3"): "3",
-    ord("4"): "4",
-    ord("5"): "5",
-    ord("6"): "6",
-    ord("7"): "7",
-    ord("8"): "8",
-    ord("9"): "9",
-    ord("a"): "a",
-    ord("b"): "b",
-    ord("c"): "c",
-    ord("d"): "d",
-    ord("e"): "e",
-    ord("f"): "f",
-    ord("g"): "g",
-    ord("h"): "h",
-    ord("i"): "i",
-    ord("j"): "j",
-    ord("k"): "k",
-    ord("l"): "l",
-    ord("m"): "m",
-    ord("n"): "n",
-    ord("o"): "o",
-    ord("p"): "p",
-    ord("q"): "q",
-    ord("r"): "r",
-    ord("s"): "s",
-    ord("t"): "t",
-    ord("u"): "u",
-    ord("v"): "v",
-    ord("w"): "w",
-    ord("x"): "x",
-    ord("y"): "y",
-    ord("z"): "z",
-}
+def fore_fromhex(hexcode):  # used for generating the role colors
+    """print in a hex defined color"""
+
+    if hexcode == "#000000":
+        return "\033[38;2;0;0;0;48;2;255;255;255m"
+    elif hexcode == "#FFFFFF":
+        return Fore.BLACK+Back.WHITE
+    hexint = int(cleanhex(hexcode), 16)
+    return ("\x1B[48;2;{};{};{}m".format(hexint >> 16,
+                                         hexint >> 8 & 0xFF,
+                                         hexint & 0xFF))
