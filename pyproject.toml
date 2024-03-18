@@ -1,11 +1,11 @@
 [build-system]
-requires = ["setuptools>=61.0","asciimatics>=1.15.0"]
+requires = ["setuptools>=61.0","asciimatics>=1.15.0","pygame>=2.5.2"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "MultiTerm"
-version = "2.1.1"
+version = "2.1.2"
 authors = [
-  { name="killgriff22", email="author@example.com" },
+  { name="killgriff22", email="kilgrif22033@gmail.com" },
 ]
 description = "A package to let you split your terminal into multiple sections, each independent of the other."
 readme = "README.md"
