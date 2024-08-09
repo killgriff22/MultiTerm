@@ -1,4 +1,4 @@
-from modules import *
+from .modules import *
 class canvas:
     def __init__(self, size: tuple[int, int]) -> None:
         self.size = size
