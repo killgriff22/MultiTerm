@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: MultiTerm
-Version: 2.2.2
+Version: 2.2.3
 Summary: A package to let you split your terminal into multiple sections, each independent of the other.
 Author-email: killgriff22 <kilgrif22033@gmail.com>
 Project-URL: Homepage, https://github.com/killgriff22/MultiTerm
