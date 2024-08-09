@@ -1,4 +1,4 @@
-from .modules import *
+from modules import *
 class canvas:
     def __init__(self, size: tuple[int, int]) -> None:
         self.size = size
@@ -26,6 +26,10 @@ class canvas:
 
 
 class Screen(canvas):
+    """Base screen class that provides a canvas to draw on.  
+    Provides a method to capture the output of a program and display it on the screen.  
+    See the [Asciimatics documentation](https://asciimatics.readthedocs.io/en/stable/) for more information on  
+    processing keyboard and mouse events."""
     def __init__(self, size: tuple, pos: tuple) -> None:
         super().__init__(size)
         self.pos = pos
@@ -35,12 +39,14 @@ class Screen(canvas):
         self.ExitFlag = Event()
         self.events = [Event() for _ in keys]
         self.cursor = [0, 0]
+        self.objects = []
 
     def draw(self) -> None:
         for i,flag in enumerate(self.events):
             if flag.is_set():
-                self.blit(list(keys.items())[i][1], (self.cursor[0], self.cursor[1]))
                 flag.clear()
+        for o in self.objects:
+            self.blit(o.label,o.pos,o.color,RESET)
         for i, line in enumerate(self.content):
             if len(line)-1 > self.size[0]:
                 self.clear()
@@ -90,6 +96,10 @@ class Screen(canvas):
 
 
 class cluster:
+    """A cluster of screens that can be interacted with.  
+    Also provides a loop for simple gui applications.  
+    Code can be run within the simple loop by providing a callback function.  
+    Custom loops may also be created, see source for builtin example."""
     def __init__(self, screens:list[Screen] = []):
         self.screens = screens
         self.focus = 0
@@ -127,10 +137,23 @@ class cluster:
                     self.screens[self.focus].cursor[1] += 1
                     self.screens[self.focus].cursor[0] = 0
                 if event.key_code in keys:
-
                     self.screens[self.screens.index(screen)].events[list(keys.keys()).index(event.key_code)].set()
                     self.screens[self.focus].cursor[0] += 1
                     self.cursors[self.focus][0] += 1
                 callback(screen,event,self.focus,self)
                 self.draw_all()
             sleep(0.1)
+
+class Interactible_Object:
+    def __init__(self,pos:tuple[int,int],label:str,color = None):
+        self.lebel = label
+        self.pos = pos
+        self.color = color if color else ""
+
+class SimpleScreen(Screen):
+    """Creates a simple screen that fills the room provided by it's position."""
+    def __init__(self, size: tuple|None=None, pos: tuple=(0,0)) -> None:
+        if not size:
+            window = os.get_terminal_size()
+            size = (window.rows-pos[0], window.columns-pos[1])
+        super().__init__(size, pos)

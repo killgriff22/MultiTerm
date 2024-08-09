@@ -17,9 +17,10 @@ import hashlib
 import time
 from subprocess import Popen, PIPE
 from threading import Thread, Event
+pygame.mixer.init()
 window = Screen.open()
 __exit__ = exit
-# os.chdir(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 clock = pygame.time.Clock()
 
 
@@ -140,3 +141,43 @@ def fore_fromhex(hexcode):  # used for generating the role colors
     return ("\x1B[48;2;{};{};{}m".format(hexint >> 16,
                                          hexint >> 8 & 0xFF,
                                          hexint & 0xFF))
+keys = {
+    # 48-57 : "0-9"
+    # 65-90 : "a-z"
+    ord("0"): "0",
+    ord("1"): "1",
+    ord("2"): "2",
+    ord("3"): "3",
+    ord("4"): "4",
+    ord("5"): "5",
+    ord("6"): "6",
+    ord("7"): "7",
+    ord("8"): "8",
+    ord("9"): "9",
+    ord("a"): "a",
+    ord("b"): "b",
+    ord("c"): "c",
+    ord("d"): "d",
+    ord("e"): "e",
+    ord("f"): "f",
+    ord("g"): "g",
+    ord("h"): "h",
+    ord("i"): "i",
+    ord("j"): "j",
+    ord("k"): "k",
+    ord("l"): "l",
+    ord("m"): "m",
+    ord("n"): "n",
+    ord("o"): "o",
+    ord("p"): "p",
+    ord("q"): "q",
+    ord("r"): "r",
+    ord("s"): "s",
+    ord("t"): "t",
+    ord("u"): "u",
+    ord("v"): "v",
+    ord("w"): "w",
+    ord("x"): "x",
+    ord("y"): "y",
+    ord("z"): "z",
+}
