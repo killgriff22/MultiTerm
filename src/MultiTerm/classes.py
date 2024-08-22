@@ -64,6 +64,9 @@ class Screen(canvas):
             lines.append(" "*self.size[0])
         for i, line in enumerate(lines):
             print_at(self.pos[0]+1, self.pos[1]+i+1, line)
+    def deep_clear(self) -> None:
+        self.content = [[" "]*self.size[0] for _ in range(self.size[1])]
+        self.clear()
     def capture_program(self, program: str, args: list[str] = []) -> None:
         self.ExitFlag.set()
         self.program = Popen([program]+args, shell=True, stdout=PIPE)
