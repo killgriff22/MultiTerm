@@ -130,8 +130,7 @@ valid_hex = "0123456789ABCDEF"
 def cleanhex(data):  # used for cleaning the hexadecimal color codes for fore_fromhex()
     return ''.join(filter(valid_hex, data.upper()))
 
-def fore_fromhex(hexcode):  # used for generating the role colors
-    """print in a hex defined color"""
+def fore_fromhex(hexcode): 
 
     if hexcode == "#000000":
         return "\033[38;2;0;0;0;48;2;255;255;255m"
@@ -141,6 +140,14 @@ def fore_fromhex(hexcode):  # used for generating the role colors
     return ("\x1B[48;2;{};{};{}m".format(hexint >> 16,
                                          hexint >> 8 & 0xFF,
                                          hexint & 0xFF))
+def fore_fromrgb(rgb):
+
+    if rgb == (0,0,0):
+        return "\033[38;2;0;0;0;48;2;255;255;255m"
+    elif rgb == (255,255,255):
+        return Fore.BLACK+Back.WHITE
+    r,g,b = rgb
+    return (f"\x1B[48;2;{r};{g};{b}m")
 keys = {
     # 48-57 : "0-9"
     # 65-90 : "a-z"
