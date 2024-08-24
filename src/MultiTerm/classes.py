@@ -3,7 +3,11 @@ class canvas:
     def __init__(self, size: tuple[int, int]) -> None:
         self.size = size
         self.content = [[" "]*size[0] for _ in range(size[1])]
-
+    def __repr__(self) -> str:
+        heap = ""
+        for line in self.content:
+            heap += "".join(line)+"\n"
+        return heap
     def fill(self, char: str) -> None:
         for x in range(0, self.size[0]):
             for y in range(0, self.size[1]):
