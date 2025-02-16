@@ -2,6 +2,7 @@ import datetime
 from MultiTerm import *
 from pyfiglet import Figlet
 import pyfiglet
+Init()
 clear()
 f = Figlet("ansi_regular")
 w, h = os.get_terminal_size()
