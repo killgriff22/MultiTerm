@@ -17,14 +17,17 @@ import hashlib
 import time
 from subprocess import Popen, PIPE
 from threading import Thread, Event
-
+class windowfilllerclass:
+    def close():
+        return
 pygame.mixer.init()
-window = None
+window = windowfilllerclass()
 __exit__ = exit
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 clock = pygame.time.Clock()
 
 def clean_exit():
+    global window
     window.close()
     
 register(clean_exit)
