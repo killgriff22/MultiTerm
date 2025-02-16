@@ -18,7 +18,7 @@ import time
 from subprocess import Popen, PIPE
 from threading import Thread, Event
 class windowfilllerclass:
-    def close(**args):
+    def close(a,**args):
         return
 pygame.mixer.init()
 window = windowfilllerclass()
